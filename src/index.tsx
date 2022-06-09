@@ -1,15 +1,28 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import ReactDOM from "react-dom/client";
+import { QueryClient, QueryClientProvider } from "react-query";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+
+const queryClient = new QueryClient();
+
+const darkTheme = createTheme({
+  palette: {
+    mode: "dark",
+  },
+});
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={darkTheme}>
+        <App />
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
